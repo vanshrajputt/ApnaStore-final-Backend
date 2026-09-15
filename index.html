@@ -1,0 +1,800 @@
+html: `
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Order Confirmation
+    </title>
+
+</head>
+
+
+<body style="
+    margin:0;
+    padding:0;
+    background:#f3f6fa;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#111827;">
+
+
+    <!-- OUTER TABLE -->
+
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="
+        width:100%;
+        margin:0;
+        padding:20px 10px;
+        background:#f3f6fa;">
+
+        <tr>
+
+            <td align="center">
+
+
+                <!-- MAIN CONTAINER -->
+
+                <table width="100%" cellpadding="0" cellspacing="0" border="0" style="
+        width:100%;
+        max-width:700px;
+        margin:0 auto;
+        background:#ffffff;
+        border-radius:18px;
+        overflow:hidden;
+        box-shadow:0 10px 35px rgba(0,0,0,0.08);">
+
+
+                    <!-- ================================= -->
+                    <!-- HEADER -->
+                    <!-- ================================= -->
+
+                    <tr>
+
+                        <td style="
+    background:linear-gradient(135deg,#0f172a,#2563eb);
+    padding:40px 25px;
+    text-align:center;">
+
+
+                            <!-- LOGO -->
+
+                            <div style="
+    display:inline-block;
+    width:70px;
+    height:70px;
+    line-height:70px;
+    background:#ffffff;
+    border-radius:50%;
+    font-size:32px;">
+
+                                🛍️
+
+                            </div>
+
+
+                            <!-- SITE NAME -->
+
+                            <h1 style="
+    margin:18px 0 8px;
+    color:#ffffff;
+    font-size:32px;
+    line-height:40px;
+    font-weight:700;">
+
+                                ${process.env.SITE_NAME}
+
+                            </h1>
+
+
+                            <p style="
+    margin:0;
+    color:#dbeafe;
+    font-size:15px;">
+
+                                Order Confirmation
+
+                            </p>
+
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- ================================= -->
+                    <!-- SUCCESS MESSAGE -->
+                    <!-- ================================= -->
+
+                    <tr>
+
+                        <td style="
+    padding:35px 25px 25px;
+    text-align:center;">
+
+
+                            <div style="
+    font-size:60px;
+    line-height:70px;">
+
+                                🎉
+
+                            </div>
+
+
+                            <h2 style="
+    margin:15px 0 10px;
+    color:#111827;
+    font-size:28px;
+    line-height:36px;">
+
+                                Order Placed Successfully!
+
+                            </h2>
+
+
+                            <p style="
+    margin:0;
+    color:#4b5563;
+    font-size:15px;
+    line-height:27px;">
+
+                                Hi
+
+                                <strong>
+                                    ${finalData.deliveryAddress?.name || "Customer"}
+                                </strong>,
+
+                                <br><br>
+
+                                Thank you for shopping with
+
+                                <strong>
+                                    ${process.env.SITE_NAME}
+                                </strong>.
+
+                                <br>
+
+                                Your order has been successfully placed.
+
+                            </p>
+
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- ================================= -->
+                    <!-- ORDER INFORMATION -->
+                    <!-- ================================= -->
+
+                    <tr>
+
+                        <td style="
+    padding:15px 25px;">
+
+
+                            <table width="100%" cellpadding="14" cellspacing="0" border="0" style="
+        width:100%;
+        background:#f8fafc;
+        border:1px solid #e5e7eb;
+        border-radius:14px;">
+
+
+                                <tr>
+
+                                    <td colspan="2" style="
+        color:#1e3a8a;
+        font-size:18px;
+        font-weight:bold;
+        padding-bottom:15px;">
+
+                                        📦 Order Information
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- ORDER ID -->
+
+                                <tr>
+
+                                    <td style="
+    color:#6b7280;
+    font-size:14px;">
+
+                                        🆔 Order ID
+
+                                    </td>
+
+
+                                    <td align="right" style="
+        color:#111827;
+        font-weight:600;
+        font-size:12px;
+        word-break:break-all;">
+
+                                        ${finalData._id}
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- ORDER DATE -->
+
+                                <tr>
+
+                                    <td style="
+    color:#6b7280;
+    font-size:14px;">
+
+                                        📅 Order Date
+
+                                    </td>
+
+
+                                    <td align="right" style="
+        color:#111827;
+        font-size:13px;">
+
+                                        ${new Date(finalData.createdAt).toLocaleString("en-IN")}
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- PAYMENT MODE -->
+
+                                <tr>
+
+                                    <td style="
+    color:#6b7280;
+    font-size:14px;">
+
+                                        💳 Payment Mode
+
+                                    </td>
+
+
+                                    <td align="right" style="
+        color:#111827;
+        font-size:14px;
+        font-weight:600;">
+
+                                        ${finalData.paymentMode || "COD"}
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- PAYMENT STATUS -->
+
+                                <tr>
+
+                                    <td style="
+    color:#6b7280;
+    font-size:14px;">
+
+                                        💰 Payment Status
+
+                                    </td>
+
+
+                                    <td align="right">
+
+                                        <span style="
+    display:inline-block;
+    background:#fef3c7;
+    color:#92400e;
+    padding:6px 13px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;">
+
+                                            ${finalData.paymentStatus || "Pending"}
+
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+
+                            </table>
+
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- ================================= -->
+                    <!-- PRODUCTS -->
+                    <!-- ================================= -->
+
+                    <tr>
+
+                        <td style="
+    padding:20px 15px;">
+
+
+                            <h3 style="
+    margin:0 0 15px;
+    color:#111827;
+    font-size:20px;
+    line-height:28px;">
+
+                                🛒 Ordered Products
+
+                            </h3>
+
+
+                            <!-- HORIZONTAL SCROLL -->
+
+                            <div style="
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;">
+
+
+                                <table cellpadding="0" cellspacing="0" border="0" style="
+        width:100%;
+        min-width:650px;
+        border:1px solid #e5e7eb;
+        border-radius:12px;
+        border-collapse:separate;
+        overflow:hidden;
+        background:#ffffff;">
+
+
+                                    <!-- TABLE HEADER -->
+
+                                    <tr style="
+    background:#f8fafc;">
+
+
+                                        <th align="left" style="
+        padding:13px 8px;
+        color:#6b7280;
+        font-size:11px;
+        white-space:nowrap;">
+
+                                            Product
+
+                                        </th>
+
+
+                                        <th align="left" style="
+        padding:13px 8px;
+        color:#6b7280;
+        font-size:11px;
+        white-space:nowrap;">
+
+                                            Brand
+
+                                        </th>
+
+
+                                        <th align="left" style="
+        padding:13px 8px;
+        color:#6b7280;
+        font-size:11px;
+        white-space:nowrap;">
+
+                                            Size
+
+                                        </th>
+
+
+                                        <th align="left" style="
+        padding:13px 8px;
+        color:#6b7280;
+        font-size:11px;
+        white-space:nowrap;">
+
+                                            Color
+
+                                        </th>
+
+
+                                        <th align="center" style="
+        padding:13px 8px;
+        color:#6b7280;
+        font-size:11px;
+        white-space:nowrap;">
+
+                                            Qty
+
+                                        </th>
+
+
+                                        <th align="right" style="
+        padding:13px 8px;
+        color:#6b7280;
+        font-size:11px;
+        white-space:nowrap;">
+
+                                            Price
+
+                                        </th>
+
+
+                                        <th align="right" style="
+        padding:13px 8px;
+        color:#6b7280;
+        font-size:11px;
+        white-space:nowrap;">
+
+                                            Total
+
+                                        </th>
+
+
+                                    </tr>
+
+
+                                    <!-- PRODUCTS -->
+
+                                    ${orderProducts}
+
+
+                                    <!-- SUBTOTAL -->
+
+                                    <tr>
+
+                                        <td colspan="6" align="right" style="
+        padding:13px;
+        border-top:1px solid #e5e7eb;
+        color:#6b7280;
+        font-size:13px;">
+
+                                            Subtotal
+
+                                        </td>
+
+
+                                        <td align="right" style="
+        padding:13px;
+        border-top:1px solid #e5e7eb;
+        color:#111827;
+        font-size:13px;
+        font-weight:600;
+        white-space:nowrap;">
+
+                                            ₹${Number(finalData.subtotal) || 0}
+
+                                        </td>
+
+                                    </tr>
+
+
+
+                                    <!-- SHIPPING -->
+
+                                    <tr>
+
+                                        <td colspan="6" align="right" style="
+        padding:13px;
+        color:#6b7280;
+        font-size:13px;">
+
+                                            Shipping
+
+                                        </td>
+
+
+                                        <td align="right" style="
+        padding:13px;
+        color:#111827;
+        font-size:13px;
+        font-weight:600;
+        white-space:nowrap;">
+
+                                            ₹${Number(finalData.shipping) || 0}
+
+                                        </td>
+
+                                    </tr>
+
+
+
+                                    <!-- GRAND TOTAL -->
+
+                                    <tr style="
+    background:#eff6ff;">
+
+
+                                        <td colspan="6" align="right" style="
+        padding:16px;
+        color:#1e3a8a;
+        font-size:17px;
+        font-weight:bold;">
+
+                                            Grand Total
+
+                                        </td>
+
+
+                                        <td align="right" style="
+        padding:16px;
+        color:#2563eb;
+        font-size:19px;
+        font-weight:bold;
+        white-space:nowrap;">
+
+                                            ₹${Number(finalData.total) || 0}
+
+                                        </td>
+
+
+                                    </tr>
+
+
+                                </table>
+
+
+                            </div>
+
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- ================================= -->
+                    <!-- DELIVERY ADDRESS -->
+                    <!-- ================================= -->
+
+                    <tr>
+
+                        <td style="
+    padding:15px 25px;">
+
+
+                            <table width="100%" cellpadding="18" cellspacing="0" border="0" style="
+        width:100%;
+        background:#f8fafc;
+        border:1px solid #e5e7eb;
+        border-radius:14px;">
+
+
+                                <tr>
+
+                                    <td>
+
+
+                                        <h3 style="
+    margin:0 0 12px;
+    color:#1e3a8a;
+    font-size:18px;">
+
+                                            📍 Delivery Address
+
+                                        </h3>
+
+
+                                        <p style="
+    margin:0;
+    color:#374151;
+    font-size:14px;
+    line-height:24px;">
+
+                                            <strong>
+                                                ${finalData.deliveryAddress?.name || ""}
+                                            </strong>
+
+                                            <br>
+
+                                            ${finalData.deliveryAddress?.address || ""}
+
+                                            <br>
+
+                                            ${finalData.deliveryAddress?.city || ""}
+
+                                            ${finalData.deliveryAddress?.state || ""}
+
+                                            <br>
+
+                                            ${finalData.deliveryAddress?.pincode || ""}
+
+                                            <br>
+
+                                            📞 ${finalData.deliveryAddress?.mobile || ""}
+
+                                        </p>
+
+
+                                    </td>
+
+                                </tr>
+
+
+                            </table>
+
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- ================================= -->
+                    <!-- WHAT'S NEXT -->
+                    <!-- ================================= -->
+
+                    <tr>
+
+                        <td style="
+    padding:20px 25px 30px;">
+
+
+                            <div style="
+    background:#eff6ff;
+    border-left:5px solid #2563eb;
+    border-radius:10px;
+    padding:20px;">
+
+
+                                <h3 style="
+    margin:0 0 8px;
+    color:#1e3a8a;
+    font-size:17px;">
+
+                                    📦 What's Next?
+
+                                </h3>
+
+
+                                <p style="
+    margin:0;
+    color:#1e40af;
+    font-size:14px;
+    line-height:24px;">
+
+                                    We are preparing your order for shipment.
+                                    You will receive another notification once
+                                    your order has been shipped.
+
+                                </p>
+
+
+                            </div>
+
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- ================================= -->
+                    <!-- CTA -->
+                    <!-- ================================= -->
+
+                    <tr>
+
+                        <td style="
+    padding:0 25px 35px;
+    text-align:center;">
+
+
+                            <a href="${process.env.SITE_URL}" style="
+        display:inline-block;
+        background:#2563eb;
+        color:#ffffff;
+        text-decoration:none;
+        padding:14px 30px;
+        border-radius:8px;
+        font-size:15px;
+        font-weight:bold;">
+
+                                🛒 Continue Shopping
+
+                            </a>
+
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <!-- ================================= -->
+                    <!-- FOOTER -->
+                    <!-- ================================= -->
+
+                    <tr>
+
+                        <td style="
+    background:#111827;
+    padding:30px 20px;
+    text-align:center;">
+
+
+                            <h3 style="
+    margin:0;
+    color:#ffffff;
+    font-size:19px;">
+
+                                ${process.env.SITE_NAME} 🛍️
+
+                            </h3>
+
+
+                            <p style="
+    margin:10px 0;
+    color:#9ca3af;
+    font-size:13px;
+    line-height:22px;">
+
+                                Thank you for shopping with
+                                ${process.env.SITE_NAME}.
+
+                                <br>
+
+                                We appreciate your business.
+
+                            </p>
+
+
+                            <a href="${process.env.SITE_URL}" style="
+        color:#60a5fa;
+        text-decoration:none;
+        font-size:13px;
+        font-weight:600;">
+
+                                Visit Our Website
+
+                            </a>
+
+
+                            <p style="
+    margin:18px 0 0;
+    color:#6b7280;
+    font-size:11px;">
+
+                                © 2026 ${process.env.SITE_NAME}.
+                                All Rights Reserved.
+
+                            </p>
+
+
+                        </td>
+
+                    </tr>
+
+
+
+                </table>
+
+                <!-- END MAIN CONTAINER -->
+
+
+            </td>
+
+        </tr>
+
+    </table>
+
+    <!-- END OUTER TABLE -->
+
+
+</body>
+
+</html>
+
+`
